@@ -1,0 +1,90 @@
+/* pokemon.css */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.pokemon-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+/* Grid moderno y responsivo para las tarjetas */
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Estilo de las tarjetas */
+.pokemon-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    overflow: hidden;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilo de la imagen del Pokémon */
+.pokemon-image {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo del nombre del Pokémon */
+.pokemon-name {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #3498db;
+}
+
+/* Estilo para los tipos de Pokémon */
+.pokemon-types {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .pokemon-card {
+        padding: 15px;
+    }
+
+    .pokemon-name {
+        font-size: 1.3rem;
+    }
+
+    .pokemon-types {
+        font-size: 0.9rem;
+    }
+}
