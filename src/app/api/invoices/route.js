@@ -22,6 +22,12 @@ export async function POST(req) {
     try {
         const { customerId, amount, status } = await req.json();
 
+        const errors = await validatePOST(req);
+        if (errors.length) {
+            return NextResponse.json({ errors }, { status: 400 });
+        }
+
+
         // Insertar una nueva factura en la base de datos
         const stmt = db.prepare('INSERT INTO invoices (customerId, amount, status) VALUES (?, ?, ?)');
         const info = stmt.run(customerId, amount, status);
@@ -31,6 +37,32 @@ export async function POST(req) {
     } catch (error) {
         return NextResponse.json({ error: 'Error inserting invoice: ' + error.message }, { status: 500 });
     }
+}
+
+async function validatePOST(req) {
+    // return array of errors
+    const errors = [];
+    const { customerId, amount, status } = await req.json();
+
+    if (!customerId) {
+        errors.push('customerId is required');
+    }
+    if (!amount) {
+        errors.push('amount is required');
+    }
+    if (!status) {
+        errors.push('status is required');
+    }
+
+    // validate customerId
+    const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
+    const user = stmt.get(customerId);
+    if (!user) {
+        errors.push('customerId is invalid');
+    }
+
+
+    return errors;
 }
 
 export async function GET() {
